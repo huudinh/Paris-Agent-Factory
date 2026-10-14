@@ -1,0 +1,58 @@
+{
+  "_doc": "Tu dien tu khoa cho tools/phan_loai.py. Nguoi lam noi dung sua duoc file nay ma khong can sua code. Thu tu trong 'van_de' la THU TU UU TIEN - khop nhom dau tien thi lay.",
+  "_version": "1.0",
+
+  "van_de": [
+    ["V-01", "Làm lại / sửa ca lỗi", ["sửa lại", "làm lại", "bị hở", "hở chân răng", "đen viền", "sứ lệch", "bị lệch", "đào thải", "niềng dở", "bọc ở chỗ khác", "làm ở chỗ khác", "bị hỏng", "răng sứ cũ", "bọc rồi", "đã bọc"]],
+    ["V-02", "Mất nhiều răng / mất cả hàm", ["mất cả hàm", "mất hết răng", "mất gần hết", "hàm giả", "tháo lắp", "all-on", "allon", "nguyên hàm", "toàn hàm dưới", "toàn hàm trên"]],
+    ["V-03", "Mất răng lẻ / trồng lại", ["mất răng", "rụng răng", "trồng răng", "trồng lại", "implant", "cấy ghép", "cầu răng", "mất 2 răng", "mất một răng"]],
+    ["V-04", "Răng lệch · khấp khểnh · thưa · hô", ["niềng", "khấp khểnh", "khểnh", "răng hô", "hơi hô", "răng thưa", "lệch khớp", "khớp cắn", "invisalign", "mắc cài", "chỉnh nha", "răng chen chúc"]],
+    ["V-05", "Răng xỉn màu · vỡ · sứt · mòn", ["bọc sứ", "bọc răng", "răng sứ", "veneer", "dán răng", "mặt dán", "răng vỡ", "sứt", "xỉn màu", "răng vàng", "răng đen", "trám răng", "mòn răng", "chết tủy đổi màu"]],
+    ["V-06", "Đau nhức · viêm tủy · áp xe", ["đau răng", "nhức răng", "đau lắm", "sưng má", "sưng mặt", "áp xe", "viêm tủy", "nhiễm trùng", "ê buốt dữ", "đau quá", "buốt lắm"]],
+    ["V-07", "Viêm nướu · vôi răng · hôi miệng", ["chảy máu chân răng", "chảy máu khi đánh răng", "viêm nướu", "viêm nha chu", "vôi răng", "cạo vôi", "lấy cao răng", "hôi miệng", "tụt nướu", "sưng nướu"]],
+    ["V-08", "Răng khôn · nhổ răng", ["răng khôn", "mọc lệch", "nhổ răng", "lợi trùm", "răng số 8"]],
+    ["V-09", "Tẩy trắng · thẩm mỹ nhẹ", ["tẩy trắng", "làm trắng răng", "đính đá", "teeth spa", "whitemax"]],
+    ["V-10", "Răng trẻ em", ["cho con", "con em", "bé bị", "bé sợ", "răng sữa", "cháu bị", "bé 6 tuổi", "bé mấy tuổi", "trẻ em", "con mình"]],
+    ["V-11", "Chưa rõ / hỏi chung", []]
+  ],
+
+  "gia_tri": {
+    "V1": ["V-02", "V-03"],
+    "V2": ["V-05"],
+    "V3": ["V-06", "V-07", "V-08", "V-09", "V-10"],
+    "_ghi_chu": "V-04 tach rieng trong code: Invisalign -> V1, mac cai -> V2. V-01 mac dinh V2, nhung neu kem implant/all-on thi V1. V-11 -> khong xac dinh.",
+    "v04_v1": ["invisalign", "trong suốt", "khay trong"],
+    "v01_v1": ["implant", "all-on", "allon", "trụ", "cấy"]
+  },
+
+  "tin_hieu": {
+    "_doc": "Tu khoa cho 5 tin hieu cham do nong. Tin hieu (1) suy ra tu nhom van de (khac V-11). Tin hieu (5) lay tu truong 'Co SDT' trong header.",
+    "th2_thoi_gian": ["hôm nay", "ngày mai", "sáng mai", "chiều mai", "mai em", "mai đến", "tuần này", "tuần sau", "cuối tuần", "trong tháng", "tháng này", "đặt lịch", "giữ lịch", "đang đến", "đến khám", "thứ bảy", "chủ nhật"],
+    "th3_hoi_cu_the": ["bác sĩ nào", "bác sĩ bên", "bác sĩ", "có lịch", "đặt lịch", "trả góp", "chi phí", "bao nhiêu tiền", "giá bao nhiêu", "chênh nhiều", "bao nhiêu ạ"],
+    "th4_mo_ta_ro": ["răng số", "hàm dưới", "hàm trên", "bên phải", "bên trái", "năm rồi", "tháng rồi", "2 năm", "3 năm", "1 năm", "mấy năm", "răng trước", "6 răng", "2 răng"]
+  },
+
+  "ghi_de": {
+    "_doc": "Ba luat ghi de cua nganh nha - P8 §1.",
+    "da_dat_lich": ["đặt lịch khám", "đặt lịch", "giữ lịch", "đang đến", "đến khám", "hẹn khám"],
+    "da_co_phim": ["phim x-quang", "x-quang", "xquang", "có phim", "phim rồi", "đã đi khám", "đi khám ở", "khám ở chỗ khác", "khám chỗ khác", "họ báo giá", "họ bảo", "bên kia"]
+  },
+
+  "rao_can": {
+    "_doc": "Map tu khoa -> ma L6.x. Mot hoi thoai co the mang nhieu rao can.",
+    "L6.7": {"nhom": "NGỜ", "ten": "Ngờ vật liệu", "kw": ["chính hãng", "trụ gì", "trụ nào", "trụ của mình", "tráo trụ", "tráo", "phôi sứ", "sứ gì", "loại sứ", "phiếu bảo hành", "mã hãng", "hàng thật"]},
+    "L6.2": {"nhom": "NGỜ", "ten": "So sánh nơi khác", "kw": ["tham khảo thêm", "xem thêm", "chỗ khác", "nơi khác", "so sánh", "bên kia", "mấy nơi", "vài nơi"]},
+    "L6.5": {"nhom": "SỢ", "ten": "Sợ đau / sợ mài răng", "kw": ["em sợ", "sợ lắm", "sợ hỏng", "sợ đau", "mài răng", "mài hết", "mài thêm", "có hại", "hại răng", "biến chứng", "mất răng thật", "bé sợ", "lo lắng"]},
+    "L6.3": {"nhom": "NGẠI", "ten": "Chưa tài chính", "kw": ["chưa đủ tiền", "chưa có tiền", "không đủ tiền", "trả góp", "đắt", "nhiều tiền", "hơi cao", "để em tính"]},
+    "L6.4": {"nhom": "NGẠI", "ten": "Chưa có thời gian / đi lại nhiều", "kw": ["đi lại nhiều", "không có thời gian", "em bận", "chưa sắp xếp", "không theo được", "nhiều buổi", "mất thời gian"]},
+    "L6.6": {"nhom": "NGỜ+NGẠI", "ten": "Hỏi ý kiến người thân", "kw": ["hỏi chồng", "hỏi vợ", "hỏi nhà", "hỏi gia đình", "người nhà", "bàn với", "hỏi bố mẹ", "hỏi con"]}
+  },
+
+  "tinh_co_co_so": ["hà nội", "hanoi", "hải phòng", "quảng ninh", "hạ long", "vinh", "nghệ an", "đà nẵng", "hồ chí minh", "tp.hcm", "tphcm", "sài gòn", "bình dương", "thái thịnh", "đống đa"],
+
+  "tu_cam": ["cam kết 100%", "khỏi 100%", "tốt nhất", "số 1", "duy nhất", "không đau", "an toàn tuyệt đối", "không biến chứng", "dùng vĩnh viễn", "trọn đời", "rẻ nhất", "như hình", "không hại gì", "yên tâm 100%"],
+
+  "hang_duoc_duyet": ["straumann", "invisalign", "nacera", "ormco"],
+
+  "dau_hieu_gia_dinh": ["cho con", "cả nhà", "chồng em", "vợ em", "bố em", "mẹ em", "hai bố con", "gia đình", "cháu"]
+}
