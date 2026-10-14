@@ -58,15 +58,45 @@ Dựng `Paris-Agent-Factory` cho thương hiệu **nhakhoaparis.vn**, tham khả
 `P2` kế thừa từ `np-chan-dung-hanh-trinh.md` v2.0.
 `P5` phần từ cấm kế thừa từ `np-rao-phap-ly.md` v2.0.
 
+### Trang hướng dẫn (artifact)
+
+`https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn` — trang HTML cho người dùng cuối, tương đương trang hướng dẫn của bản Kangnam. Gồm: giới thiệu theo **4 nhóm người dùng** (Trực Page · Ads · Trưởng nhóm · Giám đốc dịch vụ) với cột *làm được / không làm* · cài đặt 3 nền tảng dạng tab · 10 câu chạy thử · cách chuẩn bị dữ liệu và luật không được lọc mẫu · **15 prompt copy-dán** chia theo nhóm · mục hỏi nhanh lọc được theo nhóm · ba thứ riêng ngành nha · ranh giới pháp lý · link tải repo.
+
+Thiết kế theo **Design System Paris v3.1** trong `P1` §1 — Cerulean Blue `#2A52BE`, Pantone Red 032 C `#ED2E38` (chỉ dùng cho CTA và cảnh báo, giữ tỷ lệ 5%), kem `#FBF8F3`, navy `#0C1D4D`; font Bricolage Grotesque + Be Vietnam Pro. Không tự chế biến thể màu mới.
+
+> ⚠️ Artifact mặc định **private**. Phải mở Share trên trang để cả nhóm xem được.
+
 ### Công cụ
 
-- `tools/phan_loai.py` — script đối chiếu con số, chạy được, đã test trên `doc/mau-du-lieu/MAU_Hoi-thoai.md`.
+- `tools/phan_loai.py` — đối chiếu con số, chạy được, đã test trên `doc/mau-du-lieu/MAU_Hoi-thoai.md`.
 - `tools/tu-dien-van-de-rang.json` — từ điển từ khoá, người làm nội dung sửa được không cần biết code.
+- `tools/excel_style.py` — style dùng chung cho mọi file Excel: màu Design System Paris v3.1 · font Arial · freeze · wrap · bảng nhiệt bằng `ColorScaleRule` · sheet chú giải 20 mục. **Sửa quy ước màu ở một chỗ thì đổi cả hệ.**
+- `tools/xuat_bao_cao.py` — **xuất file Excel theo đúng khuôn R1–R5.** Trước đó mỗi lần chạy trợ lý lại tự viết `openpyxl` từ đầu nên định dạng mỗi lần một khác; giờ có bản tham chiếu. Ô nào script không tính được thì để `⚠` nền vàng kèm chữ mô tả cần điền gì.
+
+### Ranh giới của bộ code xuất Excel
+
+Script tính được con số, **không đọc hiểu được nội dung**. Phân chia rõ:
+
+| Script làm | Người / trợ lý làm |
+|---|---|
+| Toàn bộ cấu trúc sheet, định dạng, sheet chú giải | Ba kết luận mở đầu mỗi báo cáo |
+| Mọi con số đếm được · chấm 5 tín hiệu + 3 luật ghi đè · gán `V-01…V-11` · V1/V2/V3 · L-code | **Bảng chấm 10 tiêu chí của R3** — chỉ tiêu chí ⑨ (từ cấm) là script điền được |
+| Phát hiện từ cấm · phát hiện ca `L6.7` mà NV không nhắc đối tác hãng | Khối "Đọc nhanh" dưới mỗi bảng nhiệt · trích dẫn bằng chứng · nội dung tin nhắn (script chỉ cho khung theo rào cản) |
+
+→ Vì vậy **R3 xuất ra là KHUNG, không phải bảng điểm hoàn chỉnh**. Nói rõ ngay trên sheet Tổng quan của file.
 
 ### Sửa trong quá trình dựng
 
 - **Lỗi thẻ quảng cáo làm lệch phân loại:** dòng `[Thẻ: …]` là tin tự động nhưng ban đầu bị tính như chữ khách gõ. Headline *"không ai biết bạn đang niềng"* bị đọc thành *khách đang niềng* → xếp sai giai đoạn `CS`. Đã lọc bỏ phần thẻ khỏi chữ khách trước khi phân loại.
 - **Lỗi chữ hoa/thường ở dấu `[Ảnh]`:** văn bản đã `lower()` nên so khớp `[Ảnh]` không bao giờ trúng → tín hiệu ④ bị bỏ sót với khách chỉ gửi ảnh mà không mô tả.
+- **Lỗi định dạng phần trăm:** hàm `pc()` thay dấu `.` thành `,` ngay trong chuỗi format nên `%.1f%%` thành `%,1f%%` → `ValueError`. Phải format xong rồi mới thay dấu.
+- **Lỗi freeze pane trên sheet nhiều bảng:** sheet Tổng quan có nhiều bảng, freeze theo dòng tiêu đề cuối sẽ ghim tới 63 dòng đầu, cuộn xuống không đọc được gì. Đã đổi: chỉ freeze khi sheet có **đúng một** bảng và dòng tiêu đề nằm trong 10 dòng đầu.
+
+### Sửa khuôn báo cáo cho khớp code
+
+- `R4`: **8 → 9 sheet**, thêm sheet *Chú giải ký hiệu* ở vị trí 2 cho đồng bộ với R1/R2/R3.
+- `R5`: **6 → 7 sheet**, thêm sheet *Chú giải ký hiệu* kèm hai mục riêng của R5 — *ngưỡng nhiễu* và *tương quan ≠ nhân quả*.
+- Cả 5 khuôn `R1–R5`: thêm khối **📎 Có code mẫu sẵn** trỏ sang `tools/xuat_bao_cao.py`, để trợ lý dùng lại thay vì tự viết `openpyxl`.
 
 ---
 
@@ -108,6 +138,7 @@ Bộ này **chưa chạy trên dữ liệu thật của Paris**. Những gì đ�
 | Script `phan_loai.py` chạy đúng | Chạy trên 12 hội thoại mô phỏng, đối chiếu từng ca với bảng ghi chú cuối `MAU_Hoi-thoai.md` |
 | Phát hiện vi phạm từ cấm | Script bắt đúng `HT#4` với `cam kết 100%` · `không đau` · `không hại gì` |
 | Luật ghi đè hoạt động | Bắt đúng 3 ca: đã đặt lịch (HT#12) · đã có phim (HT#5) · đau cấp (HT#6) |
-| Độ dài khối chỉ dẫn | `SYSTEM-PROMPT.md` = **14.011** ký tự · `SYSTEM-PROMPT-NGAN.md` = **7.745** (dưới giới hạn 8.000 của ChatGPT, dư 255) |
+| Độ dài khối chỉ dẫn | `SYSTEM-PROMPT.md` = **14.010** ký tự · `SYSTEM-PROMPT-NGAN.md` = **7.744** (dưới giới hạn 8.000 của ChatGPT, dư 256) |
+| Bộ code xuất Excel | Chạy ra đủ **6 file / 46 sheet** trên dữ liệu mẫu: R1 2 file (5+5 sheet) · R2 13 sheet có 5 bảng nhiệt · R3 7 sheet · R4 9 sheet · R5 7 sheet. Đã mở lại từng file kiểm số sheet, số dòng, freeze pane và conditional formatting |
 
 **Chưa kiểm:** chất lượng báo cáo trợ lý sinh ra trên dữ liệu thật. Lần chạy thật đầu tiên nên làm trên **một dịch vụ, một kỳ ngắn**, rồi đối chiếu với cảm nhận của người trực page — họ biết khách nào nóng, và đó là thước đo tốt nhất cho việc chấm có đúng không.

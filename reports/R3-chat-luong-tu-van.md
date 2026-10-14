@@ -7,6 +7,13 @@
 
 > 🔒 **Báo cáo này có tên người thật.** Dùng cho **đào tạo và định tuyến**, không đưa vào nội dung gửi khách, không chia sẻ ra ngoài nhóm quản lý. Phần xếp hạng cá nhân để sheet riêng, có thể ẩn khi trình bày chung.
 
+> **📎 Có code mẫu sẵn.** Không cần viết `openpyxl` từ đầu — [`tools/xuat_bao_cao.py`](../tools/xuat_bao_cao.py) đã dựng đúng cấu trúc sheet, định dạng và sheet chú giải của báo cáo này:
+> ```
+> python phan_loai.py --src <file hội thoại> --out rows.json
+> python xuat_bao_cao.py --bao-cao R3 --rows rows.json --ky "<kỳ>" --out ../output
+> ```
+> Ô nào script không tính được thì để `⚠` cho người hoặc trợ lý điền. Style dùng chung ở [`tools/excel_style.py`](../tools/excel_style.py) — sửa quy ước màu ở đó thì đổi cả hệ.
+
 ---
 
 ## Thiếu dấu thời gian thì sao

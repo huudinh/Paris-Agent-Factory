@@ -50,18 +50,18 @@ Phù hợp nhất, vì trợ lý phải tra chéo nhiều file cùng lúc và th
 
 ## 🥉 ChatGPT (Custom GPT) — ⚠ phải dùng BẢN NGẮN
 
-Ô **Instructions** của ChatGPT giới hạn **8.000 ký tự**, mà bản đầy đủ dài **14.011 ký tự** → dán vào sẽ **bị cắt mất phần cuối mà ChatGPT không báo lỗi gì**. Trợ lý vẫn chạy, nhưng mất hết phần luật an toàn ở cuối.
+Ô **Instructions** của ChatGPT giới hạn **8.000 ký tự**, mà bản đầy đủ dài **14.010 ký tự** → dán vào sẽ **bị cắt mất phần cuối mà ChatGPT không báo lỗi gì**. Trợ lý vẫn chạy, nhưng mất hết phần luật an toàn ở cuối.
 
 1. **Create a GPT** → tab *Configure*.
 2. **Name** + **Description:** dán từ §0.
-3. **Instructions:** dán khối ▼▲ của [`SYSTEM-PROMPT-NGAN.md`](../SYSTEM-PROMPT-NGAN.md) — **7.745 ký tự**.
+3. **Instructions:** dán khối ▼▲ của [`SYSTEM-PROMPT-NGAN.md`](../SYSTEM-PROMPT-NGAN.md) — **7.744 ký tự**.
 4. **Knowledge:** upload 8 file `knowledge/` + 5 file `reports/` **+ thêm cả `SYSTEM-PROMPT.md`** (bản ngắn ra lệnh đọc file này để lấy chi tiết).
 
 | Nền tảng | Dán vào ô chỉ dẫn | Upload lên Knowledge | Xuất được file Excel? |
 |---|---|---|---|
-| **Claude Project** | `SYSTEM-PROMPT.md` (14.011) | 8 + 5 file | ✅ Có |
-| **Gemini Gem** | `SYSTEM-PROMPT.md` (14.011) | 8 + 5 file | ⚠ Tuỳ phiên bản |
-| **ChatGPT GPT** | `SYSTEM-PROMPT-NGAN.md` (7.745) | 8 + 5 file **+ SYSTEM-PROMPT.md** | ✅ Có (cần Code Interpreter) |
+| **Claude Project** | `SYSTEM-PROMPT.md` (14.010) | 8 + 5 file | ✅ Có |
+| **Gemini Gem** | `SYSTEM-PROMPT.md` (14.010) | 8 + 5 file | ⚠ Tuỳ phiên bản |
+| **ChatGPT GPT** | `SYSTEM-PROMPT-NGAN.md` (7.744) | 8 + 5 file **+ SYSTEM-PROMPT.md** | ✅ Có (cần Code Interpreter) |
 
 > **Nền tảng không chạy được code** thì trợ lý sẽ trả bảng markdown — bạn copy dán vào Excel. Vẫn dùng được, chỉ mất thêm vài phút thao tác tay.
 

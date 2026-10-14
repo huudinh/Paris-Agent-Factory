@@ -12,6 +12,13 @@
 
 > **Trước khi chạy:** thay `{{FILE}}` và `{{DỊCH VỤ}}` ở đầu prompt. Dịch vụ ví dụ: *Implant · Niềng răng · Bọc răng sứ · Tổng quát*.
 
+> **📎 Có code mẫu sẵn.** Không cần viết `openpyxl` từ đầu — [`tools/xuat_bao_cao.py`](../tools/xuat_bao_cao.py) đã dựng đúng cấu trúc sheet, định dạng và sheet chú giải của báo cáo này:
+> ```
+> python phan_loai.py --src <file hội thoại> --out rows.json
+> python xuat_bao_cao.py --bao-cao R1 --rows rows.json --ky "<kỳ>" --out ../output
+> ```
+> Ô nào script không tính được thì để `⚠` cho người hoặc trợ lý điền. Style dùng chung ở [`tools/excel_style.py`](../tools/excel_style.py) — sửa quy ước màu ở đó thì đổi cả hệ.
+
 ---
 
 ## PROMPT — copy từ đây

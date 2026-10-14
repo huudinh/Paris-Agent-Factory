@@ -4,7 +4,14 @@
 
 **Dành cho:** giám đốc dịch vụ, trưởng phòng marketing, ban điều hành.
 **Cần có:** file hội thoại trong kỳ. Có thêm số đặt lịch / đến khám thì đọc được cả phễu.
-**Nhận lại:** 1 file Excel — `output/Paris_BaoCaoDieuHanh_<KỲ>.xlsx`, 8 sheet. Kèm **bản tóm tắt 1 trang** để trình bày.
+**Nhận lại:** 1 file Excel — `output/Paris_BaoCaoDieuHanh_<KỲ>.xlsx`, 9 sheet. Kèm **bản tóm tắt 1 trang** để trình bày.
+
+> **📎 Có code mẫu sẵn.** Không cần viết `openpyxl` từ đầu — [`tools/xuat_bao_cao.py`](../tools/xuat_bao_cao.py) đã dựng đúng cấu trúc sheet, định dạng và sheet chú giải của báo cáo này:
+> ```
+> python phan_loai.py --src <file hội thoại> --out rows.json
+> python xuat_bao_cao.py --bao-cao R4 --rows rows.json --ky "<kỳ>" --out ../output
+> ```
+> Ô nào script không tính được thì để `⚠` cho người hoặc trợ lý điền. Style dùng chung ở [`tools/excel_style.py`](../tools/excel_style.py) — sửa quy ước màu ở đó thì đổi cả hệ.
 
 ---
 
@@ -48,7 +55,7 @@ trả bảng markdown dán được vào Excel.
 MỌI BẢNG PHỄU PHẢI TÁCH THEO V1/V2/V3. Gộp lại thì nhóm V3 đông và dễ chốt sẽ
 che mất việc V1 đang rò — và V1 là chỗ tiền thật.
 
-# CẤU TRÚC FILE EXCEL — 8 sheet
+# CẤU TRÚC FILE EXCEL — 9 sheet
 
 1. **Một trang cho lãnh đạo**
    Dòng 1–3: BA KẾT LUẬN, mỗi dòng một con số, viết bằng lời thường.
@@ -58,7 +65,12 @@ che mất việc V1 đang rò — và V1 là chỗ tiền thật.
    chưa đo được · con số nào KHÔNG dùng để quyết ngân sách.
    Sheet này phải đọc hết trong 2 phút. Không có bảng nào quá 10 dòng.
 
-2. **Phễu theo dịch vụ** — cột:
+2. **Chú giải ký hiệu** — giải nghĩa mọi ký hiệu dùng trong file: ⚠ ·
+   HOT/WARM/COLD và 5 tín hiệu · 3 luật ghi đè · V1/V2/V3 · V-01…V-11 ·
+   L-code (có L6.7) · SỢ/NGỜ/NGẠI · S1–S3·CS · nhịp T và D · quy ước màu.
+   Đọc sheet này trước khi đọc số.
+
+3. **Phễu theo dịch vụ** — cột:
    Vấn đề răng (V-xx) | Nhóm giá trị | Inbox | Có SĐT | % có SĐT | Kết nối được |
    % kết nối | Đặt lịch khám | % đặt lịch | Đến khám | % show-up | Chốt phác đồ |
    % chốt | Khâu rò nặng nhất | Chênh so mốc KPI
@@ -68,7 +80,7 @@ che mất việc V1 đang rò — và V1 là chỗ tiền thật.
      so với trung bình các dịch vụ khác khi chưa có mốc.
    → Nhóm dưới 10 hội thoại: ghi ⚠ chưa đủ mẫu, KHÔNG kết luận khâu rò.
 
-3. **Chân dung khách theo vấn đề & rào cản** — cột:
+4. **Chân dung khách theo vấn đề & rào cản** — cột:
    Vấn đề răng | Số HT | Nhóm khách chủ đạo (N1–N6) | Độ tuổi/đặc điểm quan sát được |
    Rào cản số 1 | Rào cản số 2 | % mang rào cản NGỜ | Mong muốn chính nêu ra |
    Hàm ý cho nội dung
@@ -79,27 +91,27 @@ che mất việc V1 đang rò — và V1 là chỗ tiền thật.
      NGỜ cao mà Paris lại có bằng chứng mạnh nhất về vật liệu → đây là khoảng cách
      giữa thứ mình có và thứ mình đang nói.
 
-4. **Rào cản toàn kỳ** — cột:
+5. **Rào cản toàn kỳ** — cột:
    Rào cản | Nhóm (SỢ/NGỜ/NGẠI) | L-code | Số ca | % trên tổng HT |
    Dịch vụ vướng nhiều nhất | Nhân viên xử lý được bao nhiêu ca | Bằng chứng nên dùng |
    Việc cần làm
    → Cột "Nhân viên xử lý được bao nhiêu ca": đếm số ca mà sau khi khách nêu rào cản,
      nhân viên có đưa ra bằng chứng/kịch bản phù hợp. Đây là chỗ nối sang R3.
 
-5. **Chất lượng tư vấn — bản rút gọn** — cột:
+6. **Chất lượng tư vấn — bản rút gọn** — cột:
    Chỉ số | Giá trị kỳ này | Mốc | Chênh | Hậu quả thấy được trong dữ liệu
    Tối thiểu các chỉ số: điểm chấm TB · % hội thoại đạt ≥8/10 · % có bước B5 đầy đủ ·
    % thu đủ 4 thông tin · % đưa bằng chứng đúng rào cản · số ca vi phạm ngôn từ.
    → Chạy R3 rồi thì DÙNG LẠI kết quả, không chấm lại.
    → Chưa chạy R3 thì chấm rút gọn 4 tiêu chí: ①②⑤⑩, và ghi rõ là bản rút gọn.
 
-6. **Hiệu quả quảng cáo — bản rút gọn** — cột:
+7. **Hiệu quả quảng cáo — bản rút gọn** — cột:
    Mã post | Góc tiếp cận | Số HT | % có SĐT | % HOT | % V1 | Khuyến nghị | Đủ mẫu?
    → Chạy R2 rồi thì DÙNG LẠI kết quả. Chưa chạy thì ghi `⚠ chưa có dữ liệu post`,
      KHÔNG suy đoán.
    → Luôn có cột %V1. Xếp hạng post chỉ bằng %HOT là quyết sai ngân sách ngành nha.
 
-7. **Tệp giá trị dài hạn** ⭐ — sheet riêng của ngành nha. Cột:
+8. **Tệp giá trị dài hạn** ⭐ — sheet riêng của ngành nha. Cột:
    Nhóm tệp | Số HT | Mô tả | Vì sao đáng giữ | Nhịp chạm đề xuất | Ai phụ trách
    Tối thiểu các nhóm:
    - **WARM/COLD · V1** — chưa sẵn sàng nhưng là ca Implant/All-On/Invisalign.
@@ -116,7 +128,7 @@ che mất việc V1 đang rò — và V1 là chỗ tiền thật.
    → Mỗi nhóm phải có con số đếm được. Nhóm không đếm được từ dữ liệu → ghi
      `⚠ chưa đo được`, nêu cần thêm dữ liệu gì.
 
-8. **Dữ liệu thô & cách tính** — cột:
+9. **Dữ liệu thô & cách tính** — cột:
    Chỉ số | Công thức | Tử số | Mẫu số | Nguồn dữ liệu | Hạn chế khi đọc
    → Bắt buộc có sheet này. Lãnh đạo hỏi "số này ở đâu ra" thì mở sheet này, không
      phải hỏi lại người làm báo cáo.
@@ -165,7 +177,7 @@ Cấu trúc:
 
 **Chạy R4 sau cùng.** Nó dùng lại kết quả của R1 (phân loại), R2 (quảng cáo), R3 (chất lượng tư vấn). Chạy R4 đầu tiên thì sheet 5 và sheet 6 chỉ còn bản rút gọn, giá trị thấp hơn nhiều.
 
-**Sheet 7 là phần hay bị bỏ nhưng đáng tiền nhất.** Ở ngành nha, tệp "đã đến khám mà chưa chốt phác đồ" và tệp "đã nhổ răng chưa trồng lại" là hai nhóm khách đã tự chứng minh họ có nhu cầu thật — mà thường không ai chăm, vì họ không xuất hiện trong báo cáo lead mới.
+**Sheet 8 (Tệp giá trị dài hạn) là phần hay bị bỏ nhưng đáng tiền nhất.** Ở ngành nha, tệp "đã đến khám mà chưa chốt phác đồ" và tệp "đã nhổ răng chưa trồng lại" là hai nhóm khách đã tự chứng minh họ có nhu cầu thật — mà thường không ai chăm, vì họ không xuất hiện trong báo cáo lead mới.
 
 **Phần "điều chưa đo được" không phải phần thừa.** Nó là danh sách việc cần làm để báo cáo tháng sau tốt hơn. Báo cáo nào cũng kết thúc bằng mục này thì sau 3 kỳ, dữ liệu đủ để đo cả phễu.
 

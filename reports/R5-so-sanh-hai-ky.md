@@ -3,7 +3,14 @@
 **Trả lời câu hỏi:** *Tháng này có tốt lên không, tốt lên nhờ cái gì, và cái gì đang xấu đi.*
 
 **Cần có:** dữ liệu của **hai kỳ đã chạy R1** (và R2/R3 nếu muốn so sâu hơn).
-**Nhận lại:** 1 file Excel — `output/Paris_SoSanh_<KỲ1>_vs_<KỲ2>.xlsx`, 6 sheet.
+**Nhận lại:** 1 file Excel — `output/Paris_SoSanh_<KỲ1>_vs_<KỲ2>.xlsx`, 7 sheet.
+
+> **📎 Có code mẫu sẵn.** Không cần viết `openpyxl` từ đầu — [`tools/xuat_bao_cao.py`](../tools/xuat_bao_cao.py) đã dựng đúng cấu trúc sheet, định dạng và sheet chú giải của báo cáo này:
+> ```
+> python phan_loai.py --src <file hội thoại> --out rows.json
+> python xuat_bao_cao.py --bao-cao R5 --rows rows.json --ky "<kỳ>" --out ../output
+> ```
+> Ô nào script không tính được thì để `⚠` cho người hoặc trợ lý điền. Style dùng chung ở [`tools/excel_style.py`](../tools/excel_style.py) — sửa quy ước màu ở đó thì đổi cả hệ.
 
 ---
 
@@ -68,7 +75,7 @@ DỪNG LẠI cho tôi xác nhận kết quả cổng chặn trước khi tiếp 
   việc X" nếu X có trong dữ liệu. Không suy ra "nhờ đào tạo nên tăng" khi không đo
   được điều đó.
 
-# CẤU TRÚC FILE EXCEL — 6 sheet
+# CẤU TRÚC FILE EXCEL — 7 sheet
 
 1. **Tổng quan & cổng chặn**
    Kết quả 4 câu cổng chặn, ghi rõ ràng.
@@ -78,7 +85,11 @@ DỪNG LẠI cho tôi xác nhận kết quả cổng chặn trước khi tiếp 
    bằng chứng về nguyên nhân (hoặc "chưa xác định được nguyên nhân").
    **Khối cảnh báo:** điều gì không so được và vì sao.
 
-2. **So theo chỉ số phễu** — cột:
+2. **Chú giải ký hiệu** — như các báo cáo khác, THÊM hai mục riêng của R5:
+   *ngưỡng nhiễu* (chênh dưới mức dao động tự nhiên thì không gọi là thay đổi)
+   và *tương quan ≠ nhân quả*.
+
+3. **So theo chỉ số phễu** — cột:
    Chỉ số | Kỳ 1 | Kỳ 2 | Chênh (điểm %) | Vượt ngưỡng nhiễu? | Nhận định |
    Bằng chứng về nguyên nhân
    Tối thiểu: % có SĐT · % kết nối · % đặt lịch khám · % đến khám · % chốt phác đồ ·
@@ -86,14 +97,14 @@ DỪNG LẠI cho tôi xác nhận kết quả cổng chặn trước khi tiếp 
    → Cột "Vượt ngưỡng nhiễu?" ghi CÓ / KHÔNG. Ghi KHÔNG thì cột Nhận định phải là
      "chưa kết luận được", không được viết nhận định có hướng.
 
-3. **So theo nhóm giá trị V1/V2/V3** ⭐ — cột:
+4. **So theo nhóm giá trị V1/V2/V3** ⭐ — cột:
    Nhóm giá trị | Chỉ số | Kỳ 1 | Kỳ 2 | Chênh | Vượt ngưỡng? | Nhận định
    → Đây là sheet quan trọng nhất của ngành nha. Một kỳ có thể tăng tổng số lead
      mà lại GIẢM lead V1 — tổng trông đẹp hơn trong khi doanh thu kỳ vọng giảm.
      Chỉ nhìn số tổng là không thấy.
    → Nếu thấy hiện tượng đó, đưa thẳng lên sheet 1.
 
-4. **So theo góc tiếp cận** — cột:
+5. **So theo góc tiếp cận** — cột:
    Góc tiếp cận | Số HT kỳ 1 | Số HT kỳ 2 | % HOT kỳ 1 | % HOT kỳ 2 | Chênh %HOT |
    % V1 kỳ 1 | % V1 kỳ 2 | Chênh %V1 | Vượt ngưỡng? | Nhận định | Dùng tiếp hay đổi
    Tám góc: Giá-ưu đãi-trả góp · Công nghệ giảm đau · Tình trạng cụ thể ·
@@ -101,7 +112,7 @@ DỪNG LẠI cho tôi xác nhận kết quả cổng chặn trước khi tiếp 
    Banner thông báo · Gói gia đình-trẻ em.
    → Góc nào chỉ xuất hiện ở một kỳ: ghi rõ, không so.
 
-5. **So theo rào cản** — cột:
+6. **So theo rào cản** — cột:
    Rào cản | Nhóm (SỢ/NGỜ/NGẠI) | % kỳ 1 | % kỳ 2 | Chênh | Vượt ngưỡng? |
    Nhân viên xử lý được bao nhiêu (kỳ 1 → kỳ 2) | Nhận định
    → Chỉ số đáng theo nhất: **tỷ lệ ca mang rào cản NGỜ (L6.2 + L6.7) mà nhân viên
@@ -109,7 +120,7 @@ DỪNG LẠI cho tôi xác nhận kết quả cổng chặn trước khi tiếp 
      đó là bằng chứng gần nhất cho việc đào tạo có tác dụng.
    → Vẫn phải ghi rõ đây là tương quan, không phải nhân quả.
 
-6. **Dữ liệu thô & cách tính** — cột:
+7. **Dữ liệu thô & cách tính** — cột:
    Chỉ số | Công thức | Tử/mẫu kỳ 1 | Tử/mẫu kỳ 2 | Nguồn | Hạn chế khi đọc
    → Bắt buộc có. Không có sheet này thì không ai kiểm được con số chênh lệch.
 
@@ -142,7 +153,7 @@ DỪNG LẠI cho tôi xác nhận kết quả cổng chặn trước khi tiếp 
 
 **Ngưỡng nhiễu là phần quan trọng nhất của báo cáo này.** Không có nó thì mọi dao động tự nhiên đều bị đọc thành "tốt lên" hoặc "xấu đi", và quyết định sẽ chạy theo nhiễu. Một post có 12 hội thoại kỳ trước và 15 kỳ này, tỷ lệ HOT từ 33% lên 40% — nghe như tăng 7 điểm, thực tế là 4 ca thành 6 ca. Không nói lên gì.
 
-**Sheet 3 là chỗ ngành nha dễ bị lừa nhất.** Tổng lead tăng mà lead V1 giảm là tình huống rất hay xảy ra khi chuyển ngân sách sang post banner giá rẻ: số inbox tăng vọt, báo cáo trông đẹp, doanh thu kỳ vọng lại giảm. Bảng tổng không bắt được điều đó.
+**Sheet 4 (So theo nhóm giá trị) là chỗ ngành nha dễ bị lừa nhất.** Tổng lead tăng mà lead V1 giảm là tình huống rất hay xảy ra khi chuyển ngân sách sang post banner giá rẻ: số inbox tăng vọt, báo cáo trông đẹp, doanh thu kỳ vọng lại giảm. Bảng tổng không bắt được điều đó.
 
 **"Tương quan" không phải "nhân quả".** Báo cáo này chỉ được nói *"X tăng cùng lúc với Y"*. Muốn kết luận nhân quả thì cần thiết kế khác: giữ nguyên mọi thứ, chỉ đổi một yếu tố, rồi so. Đừng để báo cáo so sánh kỳ gánh việc đó.
 

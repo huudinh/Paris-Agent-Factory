@@ -1,8 +1,67 @@
-# tools/ — công cụ đối chiếu con số (tuỳ chọn)
+# tools/ — đối chiếu con số & xuất file Excel
 
-> **Người dùng không làm IT thì bỏ qua thư mục này.** Trợ lý tự đọc và tự đếm, không cần script nào.
+> **Người dùng không làm IT thì bỏ qua thư mục này.** Trợ lý tự đọc, tự đếm và tự xuất Excel, không cần script nào.
 >
-> Thư mục này dành cho người muốn **đếm lại con số bằng máy** để đối chiếu với kết quả trợ lý — hữu ích khi mẫu lớn và bạn muốn chắc chắn trợ lý không đếm lệch.
+> Thư mục này dành cho hai việc: ① **đếm lại con số bằng máy** để đối chiếu với kết quả trợ lý · ② **xuất file Excel theo đúng khuôn R1–R5** mà không phải viết `openpyxl` từ đầu mỗi lần.
+
+## Bốn file trong này
+
+| File | Việc |
+|---|---|
+| [`phan_loai.py`](phan_loai.py) | Đọc file hội thoại → phân loại → `rows.json` + bảng đếm in ra màn hình |
+| [`xuat_bao_cao.py`](xuat_bao_cao.py) | Đọc `rows.json` → **xuất file Excel theo đúng khuôn R1–R5** |
+| [`excel_style.py`](excel_style.py) | Style dùng chung: màu thương hiệu Paris · font Arial · freeze · wrap · bảng nhiệt · sheet chú giải. **Sửa quy ước màu ở đây thì đổi cả hệ** |
+| [`tu-dien-van-de-rang.json`](tu-dien-van-de-rang.json) | Từ điển từ khoá — người làm nội dung sửa được, không cần biết code |
+
+## Chạy hai bước
+
+```bash
+cd tools
+
+# Bước 1 — phân loại
+python phan_loai.py --src ../doc/mau-du-lieu/MAU_Hoi-thoai.md --out rows.json
+
+# Bước 2 — xuất Excel
+python xuat_bao_cao.py --bao-cao tat-ca --rows rows.json --ky "01-31/10/2026" --dich-vu Implant --posts ../doc/mau-du-lieu/MAU_Danh-sach-post.md --out ../output
+```
+
+Chỉ cần một báo cáo thì đổi `tat-ca` thành `R1` · `R2` · `R3` · `R4`. Riêng R5 cần hai kỳ:
+
+```bash
+python xuat_bao_cao.py --bao-cao R5 --rows ky10.json --rows-truoc ky09.json --ky "T10/2026" --ky-truoc "T09/2026" --out ../output
+```
+
+Cần **Python 3.8+** và `openpyxl` (`pip install openpyxl`) cho bước 2. Bước 1 không cần thư viện ngoài.
+
+### Tham số của `xuat_bao_cao.py`
+
+| Tham số | Nghĩa |
+|---|---|
+| `--bao-cao` | `R1` · `R2` · `R3` · `R4` · `R5` · `tat-ca` (R1–R4, không gồm R5 vì R5 cần hai kỳ) |
+| `--rows` | File `rows.json` từ bước 1 |
+| `--ky` · `--dich-vu` | Ghi vào tiêu đề và tên file |
+| `--posts` | File markdown danh sách post — **chỉ R2 cần**. Không có thì R2 chạy chế độ dự đoán |
+| `--mau-loc` | Nếu mẫu **đã bị lọc** thì ghi rõ cách lọc, ví dụ `"100 HT chọn từ 520, ưu tiên HT dài"`. Script sẽ in cảnh báo đúng chỗ thay vì để người đọc tưởng mẫu là toàn bộ |
+| `--ket-noi` · `--dat-lich` · `--den-kham` · `--chot-phac-do` | Số phiếu cho R4. Không có thì phễu nửa sau ghi `⚠ chưa đo được` |
+| `--rows-truoc` · `--ky-truoc` | Kỳ trước, **chỉ R5 cần** |
+| `--out` | Thư mục ghi file. Mặc định `output/` |
+
+**Xuất ra mấy file:** R1 → 2 file · R2 → 1 file 13 sheet · R3 → 1 file 7 sheet · R4 → 1 file 9 sheet · R5 → 1 file 7 sheet.
+
+## ⚠ Ô ghi `⚠` là cố ý, không phải lỗi
+
+Script tính được con số, **không đọc hiểu được nội dung**. Mọi ô cần đọc hiểu đều để sẵn `⚠` kèm chữ mô tả cần điền gì, và **nền vàng** để nhìn thấy ngay.
+
+| Script làm được | Phải người / trợ lý điền |
+|---|---|
+| Mọi con số đếm được: tổng HT, %, phân bố, phễu nửa đầu | Ba kết luận mở đầu mỗi báo cáo |
+| Chấm 5 tín hiệu + 3 luật ghi đè → HOT/WARM/COLD | Bảng chấm 10 tiêu chí của R3 (chỉ tiêu chí ⑨ từ cấm là đã điền) |
+| Gán `V-01…V-11`, nhóm giá trị V1/V2/V3, L-code | Khối "Đọc nhanh" dưới mỗi bảng nhiệt |
+| Phát hiện **từ cấm** trong lời nhân viên | Trích dẫn nguyên văn làm bằng chứng |
+| Phát hiện ca `L6.7` mà NV không nhắc đối tác hãng | Nội dung tin nhắn — script chỉ cho **khung** theo rào cản |
+| Dựng toàn bộ cấu trúc sheet, định dạng, sheet chú giải | Cột "Việc cần làm", "Nhận định", "Vì sao" |
+
+**R3 xuất ra là KHUNG, không phải bảng điểm hoàn chỉnh.** Nó đã điền STT · tên · NV · vấn đề răng · nhóm giá trị · độ nóng và phần phát hiện từ cấm; mười cột tiêu chí để `⚠` cho người chấm.
 
 ---
 
@@ -22,24 +81,7 @@ Chạy cả hai, rồi so con số ở **DỪNG 1** và **DỪNG 2**:
 
 ---
 
-## Cài đặt
-
-Cần **Python 3.8+**. Không cần thư viện ngoài cho `phan_loai.py`.
-
-```bash
-python --version
-```
-
----
-
-## Chạy
-
-```bash
-cd tools
-python phan_loai.py --src ../doc/mau-du-lieu/MAU_Hoi-thoai.md
-```
-
-Tham số:
+## `phan_loai.py` — tham số
 
 | Tham số | Mặc định | Nghĩa |
 |---|---|---|

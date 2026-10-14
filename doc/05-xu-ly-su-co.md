@@ -81,7 +81,7 @@
 | Nói đã tạo file Excel mà không thấy file đâu | Nền tảng không chạy được code. Yêu cầu: *"Trả bảng markdown để tôi dán vào Excel."* |
 | File Excel mở ra lỗi font, chữ tiếng Việt thành ô vuông | Yêu cầu dùng font **Arial** toàn bộ, lưu UTF-8 |
 | Báo cáo quá dài, không trình bày được | *"Rút lại thành 1 trang cho ban giám đốc."* Hoặc chạy [`R4`](../reports/R4-bao-cao-dieu-hanh.md) — nó có sẵn bản tóm tắt 1 trang |
-| Dán bản ngắn vào ChatGPT vẫn bị cắt | Đã sửa bản ngắn làm vượt 8.000. Đếm lại khối ▼▲ (hiện **7.745**, chỉ dư **255**) |
+| Dán bản ngắn vào ChatGPT vẫn bị cắt | Đã sửa bản ngắn làm vượt 8.000. Đếm lại khối ▼▲ (hiện **7.744**, chỉ dư **256**) |
 | Hội thoại dài quá, trợ lý quên phần đầu | Chia file thành 2–3 phần, chạy từng phần rồi yêu cầu gộp kết quả. Hoặc dùng Claude Project (ngữ cảnh lớn hơn) |
 
 ---

@@ -8,6 +8,25 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 
 ---
 
+## 📘 Hướng dẫn sử dụng
+
+> ### → **[Mở trang hướng dẫn](https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn)**
+>
+> Mở đầu là **phần giới thiệu riêng cho từng nhóm người dùng** — nhóm đó hỏi trợ lý việc gì, và trợ lý **không** làm gì cho họ. Sau đó là prompt dùng được ngay, bấm copy là dán được.
+>
+> | Nhóm | Có gì ở đó |
+> |---|---|
+> | **① Trực Page** | Prompt gợi ý câu nhắn tiếp · tra nhanh mã trạng thái · chạm lại tệp nguội |
+> | **② Ads** | Prompt phân tầng post · cách chống bẫy xếp hạng bằng `%HOT` · chọn góc tiếp cận |
+> | **③ Trưởng nhóm** | Prompt chấm 10 tiêu chí · kế hoạch đào tạo 4 tuần · lỗi trượt câu hỏi ngầm |
+> | **④ Giám đốc dịch vụ** | Prompt phễu theo dịch vụ · so hai kỳ · rút báo cáo thành 1 trang |
+>
+> Kèm mục **cài đặt 3 nền tảng**, **10 câu chạy thử**, **cách chuẩn bị dữ liệu**, mục **hỏi nhanh lọc theo nhóm**, và **ba thứ chỉ ngành nha mới có**.
+
+**Người mới bắt đầu từ trang đó, không phải từ đây.** Repo này là phần file để cài vào Project/GPT/Gem — trang hướng dẫn nói *khi nào dùng cái gì*.
+
+---
+
 ## Dùng trong 3 bước
 
 ```
@@ -99,13 +118,29 @@ Thang 5 tín hiệu chấm thấp oan cho ba nhóm khách nóng nhất của ng�
 ## Cấu trúc repo
 
 ```
-SYSTEM-PROMPT.md          ← bộ não, dán vào ô chỉ dẫn (14.011 ký tự)
-SYSTEM-PROMPT-NGAN.md     ← bản 7.745 ký tự, CHỈ cho ChatGPT
+SYSTEM-PROMPT.md          ← bộ não, dán vào ô chỉ dẫn (14.010 ký tự)
+SYSTEM-PROMPT-NGAN.md     ← bản 7.744 ký tự, CHỈ cho ChatGPT
 knowledge/P1–P8           ← module thương hiệu, upload lên Knowledge
 reports/R1–R5             ← khuôn báo cáo, upload lên Knowledge
 doc/                      ← tài liệu cho người đọc, KHÔNG upload
-tools/                    ← script đối chiếu con số, tuỳ chọn
+tools/                    ← đối chiếu con số + XUẤT FILE EXCEL, tuỳ chọn
 ```
+
+### Code xuất Excel — có sẵn, không phải viết lại mỗi lần
+
+| File | Việc |
+|---|---|
+| [tools/phan_loai.py](tools/phan_loai.py) | File hội thoại → phân loại → `rows.json` + bảng đếm |
+| [tools/xuat_bao_cao.py](tools/xuat_bao_cao.py) | `rows.json` → **file Excel theo đúng khuôn R1–R5** |
+| [tools/excel_style.py](tools/excel_style.py) | Style dùng chung — màu thương hiệu · freeze · wrap · bảng nhiệt · sheet chú giải. Sửa ở đây thì đổi cả hệ |
+
+```bash
+cd tools
+python phan_loai.py --src <file hội thoại> --out rows.json
+python xuat_bao_cao.py --bao-cao tat-ca --rows rows.json --ky "T10/2026" --out ../output
+```
+
+Ô nào script không tính được (kết luận, nhận định, bảng chấm 10 tiêu chí của R3) thì để sẵn `⚠` nền vàng kèm chữ mô tả cần điền gì. Chi tiết ở [tools/README.md](tools/README.md).
 
 ### Module tri thức — upload cả 8 file
 
@@ -130,7 +165,7 @@ tools/                    ← script đối chiếu con số, tuỳ chọn
 | [doc/04-output-mau.md](doc/04-output-mau.md) | Output mẫu từng mode · **6 dấu hiệu đúng · 6 dấu hiệu sai** |
 | [doc/05-xu-ly-su-co.md](doc/05-xu-ly-su-co.md) | Tra theo triệu chứng · lỗi pháp lý xử lý ngay · lỗi dữ liệu đầu vào |
 | [doc/mau-du-lieu/](doc/mau-du-lieu/) | **12 hội thoại mô phỏng** để chạy thử · bảng danh sách post điền sẵn |
-| [tools/](tools/) | Script đếm lại con số để đối chiếu — **tuỳ chọn, người không làm IT bỏ qua** |
+| [tools/](tools/) | Đếm lại con số để đối chiếu **+ code xuất file Excel theo khuôn R1–R5** — tuỳ chọn, người không làm IT bỏ qua |
 | [doc/CHANGELOG.md](doc/CHANGELOG.md) | Lịch sử · việc còn treo |
 
 > **Quy ước:** mã `P1–P8` và `R1–R5` là **từ vựng vận hành**, được tham chiếu khắp các file — **không đổi tên**.

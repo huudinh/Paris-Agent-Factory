@@ -5,6 +5,13 @@
 **Cần có:** danh sách post đang chạy **+** file hội thoại cùng kỳ.
 **Nhận lại:** 1 file Excel — `output/Paris_PhanTang_QuangCao_<KỲ>.xlsx`, 13 sheet.
 
+> **📎 Có code mẫu sẵn.** Không cần viết `openpyxl` từ đầu — [`tools/xuat_bao_cao.py`](../tools/xuat_bao_cao.py) đã dựng đúng cấu trúc sheet, định dạng và sheet chú giải của báo cáo này:
+> ```
+> python phan_loai.py --src <file hội thoại> --out rows.json
+> python xuat_bao_cao.py --bao-cao R2 --rows rows.json --ky "<kỳ>" --out ../output
+> ```
+> Ô nào script không tính được thì để `⚠` cho người hoặc trợ lý điền. Style dùng chung ở [`tools/excel_style.py`](../tools/excel_style.py) — sửa quy ước màu ở đó thì đổi cả hệ.
+
 ---
 
 ## Hai chế độ — chọn đúng chế độ trước khi chạy

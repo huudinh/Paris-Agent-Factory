@@ -1,12 +1,12 @@
 # 📋 SYSTEM PROMPT — BẢN NGẮN (chỉ dùng cho ChatGPT)
 
-> Ô **Instructions** của ChatGPT Custom GPT giới hạn **8.000 ký tự**, mà bản đầy đủ dài **14.011 ký tự** → dán vào sẽ **bị cắt mất phần cuối mà ChatGPT không báo lỗi gì**.
+> Ô **Instructions** của ChatGPT Custom GPT giới hạn **8.000 ký tự**, mà bản đầy đủ dài **14.010 ký tự** → dán vào sẽ **bị cắt mất phần cuối mà ChatGPT không báo lỗi gì**.
 >
 > **Claude Project và Gemini Gem thì dùng [`SYSTEM-PROMPT.md`](SYSTEM-PROMPT.md) bản đầy đủ** — đừng dùng file này.
 >
 > ⚠️ Bản ngắn này ra lệnh đọc `SYSTEM-PROMPT.md` từ Knowledge để lấy chi tiết → **khi dùng ChatGPT phải upload cả `SYSTEM-PROMPT.md` lên Knowledge.**
 >
-> **Độ dài khối ▼▲ hiện tại: 7.745 ký tự · còn dư 255.** Sửa thì phải đo lại.
+> **Độ dài khối ▼▲ hiện tại: 7.744 ký tự · còn dư 256.** Sửa thì phải đo lại.
 
 ▼▼▼ COPY TỪ ĐÂY ▼▼▼
 
