@@ -10,8 +10,10 @@
 
 **Tên:**
 ```
-Trợ lý Báo cáo Fanpage Paris
+Paris-Agent-Factory
 ```
+
+> Đặt trùng tên repo và trùng tên [trang hướng dẫn](https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn) để ba thứ cùng một tên — người mới không phải nhớ ba cái tên cho cùng một hệ.
 
 **Mô tả — bản đủ:**
 ```

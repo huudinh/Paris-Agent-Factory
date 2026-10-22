@@ -62,7 +62,11 @@ Dựng `Paris-Agent-Factory` cho thương hiệu **nhakhoaparis.vn**, tham khả
 
 `https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn` — trang HTML cho người dùng cuối, tương đương trang hướng dẫn của bản Kangnam. Gồm: giới thiệu theo **4 nhóm người dùng** (Trực Page · Ads · Trưởng nhóm · Giám đốc dịch vụ) với cột *làm được / không làm* · cài đặt 3 nền tảng dạng tab · 10 câu chạy thử · cách chuẩn bị dữ liệu và luật không được lọc mẫu · **15 prompt copy-dán** chia theo nhóm · mục hỏi nhanh lọc được theo nhóm · ba thứ riêng ngành nha · ranh giới pháp lý · link tải repo.
 
+**Phần cài đặt nhúng sẵn nội dung file** theo mẫu Kangnam, nên trang tự đủ để cài mà không cần tải repo: 5 thẻ theo đúng thứ tự ô trên form (Tên · Mô tả với 5 biến thể cho từng bộ phận · Instructions bản đầy đủ 14.010 ký tự · bản ngắn 7.744 cho ChatGPT · Tri thức), mỗi thẻ có nút Copy và khối xem nội dung; cộng hai file gộp dự phòng (`P1–P8` 55,6 KB · `R1–R5` 78,6 KB, mỗi phần có dòng `===== tên file =====` để trợ lý vẫn đọc đúng từng module). Kèm cảnh báo: dùng file gộp thì mất khả năng thay riêng `P7` hàng tháng.
+
 Thiết kế theo **Design System Paris v3.1** trong `P1` §1 — Cerulean Blue `#2A52BE`, Pantone Red 032 C `#ED2E38` (chỉ dùng cho CTA và cảnh báo, giữ tỷ lệ 5%), kem `#FBF8F3`, navy `#0C1D4D`; font Bricolage Grotesque + Be Vietnam Pro. Không tự chế biến thể màu mới.
+
+**Đổi tên thống nhất:** tên artifact, tiêu đề trang, nhãn thanh điều hướng và **tên Project để dán vào ô Name** (`doc/01-cai-dat.md` §0) đều đổi thành `Paris-Agent-Factory` — trùng tên repo. Trước đó Project tên *Trợ lý Báo cáo Fanpage Paris*, tức một hệ có ba cái tên; người mới phải nhớ cả ba.
 
 > ⚠️ Artifact mặc định **private**. Phải mở Share trên trang để cả nhóm xem được.
 
@@ -90,6 +94,7 @@ Script tính được con số, **không đọc hiểu được nội dung**. Ph
 - **Lỗi thẻ quảng cáo làm lệch phân loại:** dòng `[Thẻ: …]` là tin tự động nhưng ban đầu bị tính như chữ khách gõ. Headline *"không ai biết bạn đang niềng"* bị đọc thành *khách đang niềng* → xếp sai giai đoạn `CS`. Đã lọc bỏ phần thẻ khỏi chữ khách trước khi phân loại.
 - **Lỗi chữ hoa/thường ở dấu `[Ảnh]`:** văn bản đã `lower()` nên so khớp `[Ảnh]` không bao giờ trúng → tín hiệu ④ bị bỏ sót với khách chỉ gửi ảnh mà không mô tả.
 - **Lỗi định dạng phần trăm:** hàm `pc()` thay dấu `.` thành `,` ngay trong chuỗi format nên `%.1f%%` thành `%,1f%%` → `ValueError`. Phải format xong rồi mới thay dấu.
+- **Số ký tự khối chỉ dẫn lệch 1:** tài liệu ghi 14.011 / 7.745 trong khi nút Copy của trang hướng dẫn trả về 14.010 / 7.744 — chênh một ký tự xuống dòng cuối. Đã đồng bộ tài liệu theo **số thật mà người dùng dán**, vì con số này tồn tại để so với giới hạn 8.000 ký tự của ChatGPT.
 - **Lỗi freeze pane trên sheet nhiều bảng:** sheet Tổng quan có nhiều bảng, freeze theo dòng tiêu đề cuối sẽ ghim tới 63 dòng đầu, cuộn xuống không đọc được gì. Đã đổi: chỉ freeze khi sheet có **đúng một** bảng và dòng tiêu đề nằm trong 10 dòng đầu.
 
 ### Sửa khuôn báo cáo cho khớp code

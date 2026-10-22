@@ -12,7 +12,9 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 
 > ### → **[Mở trang hướng dẫn](https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn)**
 >
-> Mở đầu là **phần giới thiệu riêng cho từng nhóm người dùng** — nhóm đó hỏi trợ lý việc gì, và trợ lý **không** làm gì cho họ. Sau đó là prompt dùng được ngay, bấm copy là dán được.
+> **Trang tự đủ để cài — không tải repo cũng được.** Phần cài đặt nhúng sẵn **toàn bộ bộ não** (bản đầy đủ 14.010 ký tự và bản ngắn 7.744 cho ChatGPT), mỗi cái một nút Copy; cộng hai **file gộp dự phòng** thay cho 13 file rời khi máy không tải được file.
+>
+> Mở đầu là **phần giới thiệu riêng cho từng nhóm người dùng** — nhóm đó hỏi trợ lý việc gì, và trợ lý **không** làm gì cho họ. Sau đó là **15 prompt** bấm copy là dán được:
 >
 > | Nhóm | Có gì ở đó |
 > |---|---|
@@ -21,9 +23,11 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 > | **③ Trưởng nhóm** | Prompt chấm 10 tiêu chí · kế hoạch đào tạo 4 tuần · lỗi trượt câu hỏi ngầm |
 > | **④ Giám đốc dịch vụ** | Prompt phễu theo dịch vụ · so hai kỳ · rút báo cáo thành 1 trang |
 >
-> Kèm mục **cài đặt 3 nền tảng**, **10 câu chạy thử**, **cách chuẩn bị dữ liệu**, mục **hỏi nhanh lọc theo nhóm**, và **ba thứ chỉ ngành nha mới có**.
+> Kèm **năm ô cần điền theo đúng thứ tự trên form** (có 5 biến thể ô Mô tả cho từng bộ phận) · **cài trên 3 nền tảng** · **bảng kiểm 4 câu** bắt đúng ba lỗi cài đặt hay gặp · **cách chuẩn bị dữ liệu** và luật không được lọc mẫu · mục **hỏi nhanh lọc theo nhóm** · **ba thứ chỉ ngành nha mới có**.
 
 **Người mới bắt đầu từ trang đó, không phải từ đây.** Repo này là phần file để cài vào Project/GPT/Gem — trang hướng dẫn nói *khi nào dùng cái gì*.
+
+> ⚠️ Trang đang ở chế độ **private**. Mở menu **Share** trên trang để cả nhóm xem được.
 
 ---
 
@@ -159,7 +163,7 @@ python xuat_bao_cao.py --bao-cao tat-ca --rows rows.json --ky "T10/2026" --out .
 
 | File | Nội dung |
 |---|---|
-| [doc/01-cai-dat.md](doc/01-cai-dat.md) | Cài lên Claude / Gemini / ChatGPT · **10 câu chạy thử** · bảo trì hàng tháng |
+| [doc/01-cai-dat.md](doc/01-cai-dat.md) | Cài lên Claude / Gemini / ChatGPT · **10 câu chạy thử** · bảo trì hàng tháng. Bản cho người dùng cuối: [trang hướng dẫn](https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn) |
 | [doc/02-chuan-bi-du-lieu.md](doc/02-chuan-bi-du-lieu.md) | **Xuất dữ liệu ở đâu** · luật không được lọc mẫu · định dạng chuẩn · danh sách kiểm |
 | [doc/03-cau-lenh-mau.md](doc/03-cau-lenh-mau.md) | Câu lệnh copy-dán cho 5 báo cáo · bảng hỏi nhanh · 4 việc trợ lý sẽ từ chối |
 | [doc/04-output-mau.md](doc/04-output-mau.md) | Output mẫu từng mode · **6 dấu hiệu đúng · 6 dấu hiệu sai** |
