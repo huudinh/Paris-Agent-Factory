@@ -12,7 +12,7 @@
 | Tự nhận sẽ nhắn cho khách, hoặc trả lời như đang chat với khách | Bỏ qua §1 của bộ não | Nhắc: *"Bạn không chat với khách. Mọi nội dung là bản gợi ý để người duyệt."* |
 | Trả lời toàn mã L6.7, V-03, HOT·V1 — đọc không hiểu | Bỏ khối "làm việc với người không làm IT" | Nhắc: *"Giải nghĩa mã bằng lời thường ngay lần đầu dùng."* |
 | Chạy một mạch rồi mới cho xem, không dừng lại hỏi | Bỏ hai điểm dừng | Nhắc: *"Dừng lại ở bước đếm và bước phân bố cho tôi xác nhận."* |
-| Tự nghĩ ra cấu trúc báo cáo khác mỗi lần chạy | **Chưa upload `reports/R1–R5`** | Upload 5 file trong [`reports/`](../reports/) |
+| Tự nghĩ ra cấu trúc báo cáo khác mỗi lần chạy | **Chưa upload `reports/R1–R6`** | Upload 6 file trong [`reports/`](../reports/) |
 
 ---
 
@@ -88,7 +88,7 @@
 
 # 7. Khi không biết lỗi ở đâu — làm lại 4 bước
 
-1. **Hỏi lại trợ lý:** `Bạn là ai? Làm được những báo cáo nào?` → không trả về 5 báo cáo R1–R5 thì phần chỉ dẫn đang sai.
+1. **Hỏi lại trợ lý:** `Bạn là ai? Làm được những báo cáo nào?` → không trả về 6 báo cáo R1–R6 thì phần chỉ dẫn đang sai.
 2. **Kiểm Knowledge:** đủ **13 file** chưa (8 file `P`, 5 file `R`)? Thiếu `P6` hoặc `P8` là sai nhiều nhất.
 3. **Chạy lại 10 câu smoke test** ở [`01-cai-dat`](01-cai-dat.md) §3. Câu nào sai thì cột cuối chỉ đúng file cần kiểm.
 4. **Vẫn sai** → tạo Project/Gem/GPT mới, cài lại từ đầu. Nhanh hơn đi tìm lỗi trong một cấu hình đã lộn xộn.

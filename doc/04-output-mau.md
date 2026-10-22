@@ -37,6 +37,9 @@ CHƯA LÀM ĐƯỢC
   R4  Nửa phễu sau         — thiếu SỐ ĐẶT LỊCH và SỐ ĐẾN KHÁM.
       Xin ở phòng khám / hệ thống đặt lịch. Hai con số, không cần file.
   R5  So sánh hai kỳ       — chưa có dữ liệu kỳ trước.
+  R6  Chân dung khách hàng — thiếu BẢNG DANH SÁCH KHÁCH.
+      Cần: năm sinh/tuổi · giới tính · vấn đề gặp phải · dịch vụ sử dụng.
+      Có thêm chi nhánh và tình trạng thì đọc được nhiều hơn.
 
 Anh/chị muốn em chạy cái nào trước ạ?
 ```

@@ -2,6 +2,44 @@
 
 ---
 
+## v1.1 — 2026-10-22 · R6 Chân dung khách hàng
+
+Thêm báo cáo thứ sáu, đọc **nguồn dữ liệu mới**: bảng danh sách khách xuất từ CRM — mỗi dòng một người, không có nội dung tin nhắn.
+
+**Vì sao cần.** R1–R5 đều đọc hội thoại, nên chỉ biết được **ai đang inbox**. Người chạy nội dung và quảng cáo cần biết **khách Paris là ai** — gồm cả nhóm đến phòng khám bằng đường khác, chưa từng nhắn tin. Hai câu hỏi khác nhau, hai nguồn dữ liệu khác nhau.
+
+**Đầu vào:** `Năm sinh` *hoặc* `Tuổi` · `Giới tính` · `Vấn đề gặp phải` · `Dịch vụ sử dụng` (bắt buộc) + `Chi nhánh` · `Tình trạng` (nên có).
+
+**Đầu ra:** 1 file Excel 5 sheet — chân dung theo nhóm `N1–N6` · bốn bảng chéo · **khoảng trống** · dữ liệu đã chuẩn hoá · chú giải.
+
+### Ba quyết định đáng ghi lại
+
+**① Dùng lại bộ mã sẵn có, không đẻ mã mới.** Vấn đề gặp phải → `V-01…V-11` của `P4`; dịch vụ → `V1/V2/V3`; nhóm khách → `N1–N6` của `P2`. Sinh một bộ mã riêng cho R6 là cách nhanh nhất làm hỏng từ vựng vận hành đang dùng chung giữa các báo cáo.
+
+**② Cột "Tình trạng" tự nhận loại, không hỏi trước.** Mỗi hệ CRM ghi một kiểu: có nơi là trạng thái lead (*mới · đang tư vấn · đã đến khám*), có nơi là tình trạng răng, có nơi là hôn nhân. Prompt bắt trợ lý đọc giá trị thật rồi **nói rõ đã hiểu theo loại nào** ở điểm dừng đầu — sửa ở đó rẻ hơn sửa sau khi đã dựng xong 5 sheet.
+
+**③ Sheet "Khoảng trống" ghi câu hỏi, không ghi kết luận.** Chênh lệch giữa *Vấn đề gặp phải* và *Dịch vụ sử dụng* là phần đáng tiền nhất của R6 — nhưng đó là **hai thời điểm khác nhau**, không phải hai số đáng lẽ phải bằng nhau. Khách mất răng lẻ có thể đang chờ ghép xương, hoặc chọn cầu răng thay Implant. Nên báo cáo ghi *"120 khách V-03 nhưng chỉ 28 dùng dịch vụ V1 — 92 người còn lại đang dùng gì?"*, ⛔ không ghi *"mất 92 khách"*.
+
+### Ranh giới giữ nguyên
+- Ngưỡng **10 khách** mỗi nhóm mới được kết luận — như R2 · R3 · R4.
+- ⛔ Không suy thu nhập, học vấn, nghề nghiệp từ tuổi, giới hay chi nhánh.
+- ⛔ Không gán đặc điểm giới tính mà bảng chéo không cho thấy.
+- ⛔ Không chẩn đoán: cột *Vấn đề gặp phải* là chữ người nhập ghi, không phải chẩn đoán y khoa.
+- ⛔ Không in tên, SĐT, thông tin định danh khách vào file đầu ra.
+
+**Cập nhật theo:** `SYSTEM-PROMPT.md` §1 · `SYSTEM-PROMPT-NGAN.md` (phải cắt chỗ trùng lặp để vẫn dưới 8.000 — khối copy còn **7.935**) · `README` · `doc/01` `doc/02` §7 `doc/03` `doc/04` `doc/05` · `tools/README` · mẫu dữ liệu `doc/mau-du-lieu/MAU_Danh-sach-khach.md`.
+
+### Trang hướng dẫn: thêm bản nguồn và công cụ bơm lại
+
+Trang hướng dẫn trước giờ **chỉ tồn tại trên claude.ai**, không có bản nguồn trong repo — nên sửa repo xong thì trang vẫn dạy bản cũ, và muốn sửa trang thì phải đọc ngược 3.396 dòng HTML từ artifact về. Nay:
+
+- **`tools/huong-dan.html`** — bản nguồn, commit vào repo. Sửa ở đây rồi publish đè lên cùng URL.
+- **`tools/cap-nhat-trang-huong-dan.py`** — bơm lại 4 khối nhúng (bộ não đầy đủ · bộ não ngắn · tri thức P1–P8 gộp · khuôn báo cáo gộp) cùng các nhãn cỡ file. Chạy sau mỗi lần sửa repo, khỏi phải sửa tay 4 chỗ.
+
+Trang đã cập nhật lên **19 prompt** (thêm nhóm ⑤ Chân dung khách hàng), bảng dữ liệu có dòng R6, và mục *Bảng danh sách khách* trong phần Chuẩn bị dữ liệu. Sửa thêm 14 chỗ còn ghi "5 báo cáo / R1–R5 / 13 file".
+
+---
+
 ## v1.0 — 2026-10-14 · Bản đầu
 
 Dựng `Paris-Agent-Factory` cho thương hiệu **nhakhoaparis.vn**, tham khảo kiến trúc [`Kangnam-Agent-Factory`](../../Kangnam-Agent-Factory/) v2.3 của `benhvienthammykangnam.com.vn`.

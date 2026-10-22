@@ -2,7 +2,7 @@
 
 > **Người dùng không làm IT thì bỏ qua thư mục này.** Trợ lý tự đọc, tự đếm và tự xuất Excel, không cần script nào.
 >
-> Thư mục này dành cho hai việc: ① **đếm lại con số bằng máy** để đối chiếu với kết quả trợ lý · ② **xuất file Excel theo đúng khuôn R1–R5** mà không phải viết `openpyxl` từ đầu mỗi lần.
+> Thư mục này dành cho hai việc: ① **đếm lại con số bằng máy** để đối chiếu với kết quả trợ lý · ② **xuất file Excel theo đúng khuôn R1–R5** mà không phải viết `openpyxl` từ đầu mỗi lần. (R6 đọc bảng khách, không phải hội thoại — trợ lý tự viết script, dùng lại `excel_style.py`.)
 
 ## Bốn file trong này
 
@@ -12,6 +12,8 @@
 | [`xuat_bao_cao.py`](xuat_bao_cao.py) | Đọc `rows.json` → **xuất file Excel theo đúng khuôn R1–R5** |
 | [`excel_style.py`](excel_style.py) | Style dùng chung: màu thương hiệu Paris · font Arial · freeze · wrap · bảng nhiệt · sheet chú giải. **Sửa quy ước màu ở đây thì đổi cả hệ** |
 | [`tu-dien-van-de-rang.json`](tu-dien-van-de-rang.json) | Từ điển từ khoá — người làm nội dung sửa được, không cần biết code |
+| [`cap-nhat-trang-huong-dan.py`](cap-nhat-trang-huong-dan.py) | Bơm lại bộ não + tri thức + khuôn báo cáo vào `huong-dan.html`. Chạy sau mỗi lần sửa repo |
+| [`huong-dan.html`](huong-dan.html) | **Bản nguồn của [trang hướng dẫn](https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn).** Sửa ở đây rồi publish đè lên cùng URL |
 
 ## Chạy hai bước
 

@@ -40,7 +40,7 @@ Phù hợp nhất, vì trợ lý phải tra chéo nhiều file cùng lúc và th
 3. Mở **Instructions** (hoặc *Set project instructions*) → dán **toàn bộ khối giữa hai vạch ▼▲** trong [`SYSTEM-PROMPT.md`](../SYSTEM-PROMPT.md).
 4. Mở **Project knowledge** → **Add content** → upload **13 file**:
    - 8 file trong [`knowledge/`](../knowledge/) — `P1` đến `P8`
-   - 5 file trong [`reports/`](../reports/) — `R1` đến `R5`
+   - 6 file trong [`reports/`](../reports/) — `R1` đến `R6`
 5. Xong. Chuyển xuống §3 chạy thử.
 
 ## 🥈 Gemini (Gems)
@@ -74,13 +74,13 @@ Phù hợp nhất, vì trợ lý phải tra chéo nhiều file cùng lúc và th
 | Nhóm | Upload? | Vì sao |
 |---|---|---|
 | `knowledge/P1–P8` (8 file) | ✅ **Có** | Module thương hiệu — trợ lý tra để đọc đúng hội thoại |
-| `reports/R1–R5` (5 file) | ✅ **Có** | Khuôn báo cáo — thiếu thì trợ lý tự nghĩ ra cấu trúc khác mỗi lần chạy |
+| `reports/R1–R6` (6 file) | ✅ **Có** | Khuôn báo cáo — thiếu thì trợ lý tự nghĩ ra cấu trúc khác mỗi lần chạy |
 | `SYSTEM-PROMPT.md` | ⚠ **Chỉ với ChatGPT** | Bản ngắn ra lệnh đọc file này để lấy chi tiết |
 | `doc/` | ❌ **Không** | Tài liệu cho người đọc. Upload chỉ làm loãng |
 | `doc/mau-du-lieu/` | ❌ **Không** | File mẫu để bạn điền, không phải tri thức |
 | `tools/` | ❌ **Không** | Script tuỳ chọn, xem [`tools/README.md`](../tools/README.md) |
 
-> **Mã `P1–P8` và `R1–R5` là từ vựng vận hành** — được tham chiếu khắp các file và trong hội thoại hàng ngày. **Không đổi tên file.**
+> **Mã `P1–P8` và `R1–R6` là từ vựng vận hành** — được tham chiếu khắp các file và trong hội thoại hàng ngày. **Không đổi tên file.**
 
 ---
 
@@ -90,7 +90,7 @@ Gõ từng câu, so với cột "Kỳ vọng". Sai câu nào thì xem cột cu�
 
 | # | Gõ vào | Kỳ vọng | Sai thì kiểm |
 |---|---|---|---|
-| 1 | `Bạn là ai? Làm được những báo cáo nào?` | 5 báo cáo R1–R5, nói rõ **không tạo agent, không chat với khách** | Chưa dán đúng khối ▼▲ |
+| 1 | `Bạn là ai? Làm được những báo cáo nào?` | 6 báo cáo R1–R6, nói rõ **không tạo agent, không chat với khách** | Chưa dán đúng khối ▼▲ |
 | 2 | `Tạo cho mình một AI-Agent tư vấn Implant.` | **Từ chối**, nói ngoài phạm vi, rồi hướng về 5 báo cáo | `SYSTEM-PROMPT` bị cắt |
 | 3 | `Khách bảo "trụ này có chính hãng không" thì xếp mã nào?` | **L6.7** — ngờ vật liệu, rào cản **NGỜ**, và **giải nghĩa mã bằng lời thường** | Chưa upload `P6` |
 | 4 | `Lead HOT của cạo vôi và lead WARM của Implant, cái nào đáng chăm hơn?` | **WARM·Implant đáng hơn**, giải thích bằng nhóm giá trị V1 vs V3 | Chưa upload `P4` |

@@ -22,7 +22,7 @@ Tháng này mình thấy inbox nhiều mà đặt lịch ít. Xem giúp mình ng
 
 ---
 
-# B · NĂM CÂU LỆNH CHO NĂM BÁO CÁO
+# B · SÁU CÂU LỆNH CHO SÁU BÁO CÁO
 
 ## R1 — Khách là ai, nhắn lại thế nào
 
@@ -60,6 +60,42 @@ Chạy báo cáo R4 cho tháng 10. Mình chưa có số đến khám.
 So sánh tháng 9 và tháng 10. Đây là dữ liệu hai kỳ.
 ```
 
+## R6 — Khách Paris là ai
+
+Dán **bảng danh sách khách** (không phải file hội thoại) rồi gõ:
+
+```
+Dựng chân dung khách hàng từ bảng này. Kỳ: tháng 10.
+```
+
+Nói bằng lời thường cũng được — đây là cách người ta hay hỏi nhất:
+
+```
+Khách đến Paris tháng này là những ai? Mình cần biết để viết nội dung quảng cáo.
+```
+
+```
+Nhóm khách nào đang đông mà mình chưa có bài viết cho họ?
+```
+
+Chỉ muốn một chi nhánh:
+
+```
+Dựng chân dung riêng cho chi nhánh Hải Phòng, so với toàn hệ thống.
+```
+
+Chạy cùng R1 để biết nhóm nào quảng cáo chưa chạm tới:
+
+```
+Đây là bảng khách và file hội thoại cùng tháng 10. Nhóm nào đông trong danh sách
+khách mà lại vắng trong inbox?
+```
+
+> **Bảng khách cần cột gì:** *Năm sinh* hoặc *Tuổi* · *Giới tính* · *Vấn đề gặp phải* ·
+> *Dịch vụ sử dụng*. Có thêm *Chi nhánh* và *Tình trạng* thì đọc được nhiều hơn.
+> Thiếu cột nào trợ lý nói rõ phần nào không chạy được rồi chạy tiếp phần còn lại —
+> **không bắt bạn sửa file**.
+
 ---
 
 # C · HỎI NHANH — không cần mở báo cáo
@@ -75,6 +111,8 @@ Dùng khi đang trực page, cần tra một thứ cho nhanh.
 | `Khách ở Thái Nguyên, có tính là xa không?` | **Có** — ngoài 7 tỉnh/thành có cơ sở → L2.5. (Trong 7 tỉnh mà bảo xa → L6.4) |
 | `Lead HOT cạo vôi và lead WARM Implant, gọi ai trước?` | **WARM Implant** — V1 vs V3, giải thích bằng ma trận ưu tiên |
 | `Nhân viên nói "niềng không đau đâu chị" có sai không?` | **Sai** — từ cấm, hội thoại bị 0 điểm. Kèm câu đúng nên nói |
+| `Khách 52 tuổi, mất 2 răng hàm, ở Vinh — thuộc nhóm nào?` | **N1** · vấn đề `V-03` · nhóm giá trị **V1** · rào cản thường gặp và giọng nên dùng |
+| `Nhóm N3 niềng răng nên chạy góc tiếp cận nào?` | Góc hợp với nhóm đó + câu hỏi ngầm họ chưa hỏi (từ `P2`) |
 
 ---
 

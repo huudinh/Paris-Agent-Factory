@@ -12,9 +12,9 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 
 > ### → **[Mở trang hướng dẫn](https://claude.ai/artifact/RGqakkH2sxNpvFCx62hhjn)**
 >
-> **Trang tự đủ để cài — không tải repo cũng được.** Phần cài đặt nhúng sẵn **toàn bộ bộ não** (bản đầy đủ 14.010 ký tự và bản ngắn 7.744 cho ChatGPT), mỗi cái một nút Copy; cộng hai **file gộp dự phòng** thay cho 13 file rời khi máy không tải được file.
+> **Trang tự đủ để cài — không tải repo cũng được.** Phần cài đặt nhúng sẵn **toàn bộ bộ não** (bản đầy đủ 14.540 ký tự và bản ngắn 7.935 cho ChatGPT), mỗi cái một nút Copy; cộng hai **file gộp dự phòng** thay cho 14 file rời khi máy không tải được file.
 >
-> Mở đầu là **phần giới thiệu riêng cho từng nhóm người dùng** — nhóm đó hỏi trợ lý việc gì, và trợ lý **không** làm gì cho họ. Sau đó là **15 prompt** bấm copy là dán được:
+> Mở đầu là **phần giới thiệu riêng cho từng nhóm người dùng** — nhóm đó hỏi trợ lý việc gì, và trợ lý **không** làm gì cho họ. Sau đó là **19 prompt** bấm copy là dán được:
 >
 > | Nhóm | Có gì ở đó |
 > |---|---|
@@ -22,6 +22,7 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 > | **② Ads** | Prompt phân tầng post · cách chống bẫy xếp hạng bằng `%HOT` · chọn góc tiếp cận |
 > | **③ Trưởng nhóm** | Prompt chấm 10 tiêu chí · kế hoạch đào tạo 4 tuần · lỗi trượt câu hỏi ngầm |
 > | **④ Giám đốc dịch vụ** | Prompt phễu theo dịch vụ · so hai kỳ · rút báo cáo thành 1 trang |
+| **⑤ Chân dung khách** | Prompt dựng chân dung từ bảng khách · so chi nhánh · tìm nhóm quảng cáo chưa chạm tới |
 >
 > Kèm **năm ô cần điền theo đúng thứ tự trên form** (có 5 biến thể ô Mô tả cho từng bộ phận) · **cài trên 3 nền tảng** · **bảng kiểm 4 câu** bắt đúng ba lỗi cài đặt hay gặp · **cách chuẩn bị dữ liệu** và luật không được lọc mẫu · mục **hỏi nhanh lọc theo nhóm** · **ba thứ chỉ ngành nha mới có**.
 
@@ -45,7 +46,7 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 
 ---
 
-## Năm báo cáo
+## Sáu báo cáo
 
 | Mã | Báo cáo | Trả lời câu hỏi | Cần có |
 |---|---|---|---|
@@ -54,8 +55,11 @@ Kiến trúc kế thừa [`Kangnam-Agent-Factory`](../Kangnam-Agent-Factory/) v2
 | **[R3](reports/R3-chat-luong-tu-van.md)** | Chất lượng tư vấn & đào tạo | Nhân viên hổng khâu nào, **tuần tới dạy gì** | Hội thoại có dấu thời gian |
 | **[R4](reports/R4-bao-cao-dieu-hanh.md)** | Báo cáo điều hành theo dịch vụ | **Phễu rò ở đâu**, dịch vụ nào đang mất tiền | Hội thoại (+ số đến khám nếu có) |
 | **[R5](reports/R5-so-sanh-hai-ky.md)** | So sánh hai kỳ | Có tốt lên không, **nhờ cái gì** | Dữ liệu 2 kỳ đã chạy R1 |
+| **[R6](reports/R6-chan-dung-khach-hang.md)** | Chân dung khách hàng | Khách Paris **là ai**, viết nội dung cho ai | **Bảng danh sách khách** |
 
 **Chạy theo thứ tự R1 → R2 → R3 → R4.** R4 dùng lại kết quả ba cái trước; chạy R4 đầu tiên thì chỉ có bản rút gọn.
+
+**R6 chạy độc lập** vì nó đọc nguồn khác: bảng danh sách khách, không phải hội thoại. Có cả hai thì R1 trả lời *ai đang inbox*, R6 trả lời *khách Paris là ai* — nhóm đông ở R6 mà vắng ở R1 là nhóm quảng cáo chưa chạm tới.
 
 ---
 
@@ -125,7 +129,7 @@ Thang 5 tín hiệu chấm thấp oan cho ba nhóm khách nóng nhất của ng�
 SYSTEM-PROMPT.md          ← bộ não, dán vào ô chỉ dẫn (14.010 ký tự)
 SYSTEM-PROMPT-NGAN.md     ← bản 7.744 ký tự, CHỈ cho ChatGPT
 knowledge/P1–P8           ← module thương hiệu, upload lên Knowledge
-reports/R1–R5             ← khuôn báo cáo, upload lên Knowledge
+reports/R1–R6             ← khuôn báo cáo, upload lên Knowledge
 doc/                      ← tài liệu cho người đọc, KHÔNG upload
 tools/                    ← đối chiếu con số + XUẤT FILE EXCEL, tuỳ chọn
 ```
@@ -135,7 +139,7 @@ tools/                    ← đối chiếu con số + XUẤT FILE EXCEL, tuỳ
 | File | Việc |
 |---|---|
 | [tools/phan_loai.py](tools/phan_loai.py) | File hội thoại → phân loại → `rows.json` + bảng đếm |
-| [tools/xuat_bao_cao.py](tools/xuat_bao_cao.py) | `rows.json` → **file Excel theo đúng khuôn R1–R5** |
+| [tools/xuat_bao_cao.py](tools/xuat_bao_cao.py) | `rows.json` → **file Excel theo đúng khuôn R1–R5** (R6 trợ lý tự viết script) |
 | [tools/excel_style.py](tools/excel_style.py) | Style dùng chung — màu thương hiệu · freeze · wrap · bảng nhiệt · sheet chú giải. Sửa ở đây thì đổi cả hệ |
 
 ```bash
@@ -172,7 +176,7 @@ python xuat_bao_cao.py --bao-cao tat-ca --rows rows.json --ky "T10/2026" --out .
 | [tools/](tools/) | Đếm lại con số để đối chiếu **+ code xuất file Excel theo khuôn R1–R5** — tuỳ chọn, người không làm IT bỏ qua |
 | [doc/CHANGELOG.md](doc/CHANGELOG.md) | Lịch sử · việc còn treo |
 
-> **Quy ước:** mã `P1–P8` và `R1–R5` là **từ vựng vận hành**, được tham chiếu khắp các file — **không đổi tên**.
+> **Quy ước:** mã `P1–P8` và `R1–R6` là **từ vựng vận hành**, được tham chiếu khắp các file — **không đổi tên**.
 
 ---
 

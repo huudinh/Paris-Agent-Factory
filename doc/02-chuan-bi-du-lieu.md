@@ -14,6 +14,7 @@
 | **R3** Chất lượng tư vấn | File hội thoại **có dấu thời gian từng tin** + tên phụ trách | Phần ghi chú bàn giao nội bộ |
 | **R4** Báo cáo điều hành | File hội thoại | **Số đặt lịch · số đến khám · số chốt phác đồ** |
 | **R5** So sánh hai kỳ | Dữ liệu 2 kỳ đã chạy R1 | Dữ liệu R2/R3 của cả 2 kỳ |
+| **R6** Chân dung khách hàng | **Bảng danh sách khách** — xem mục 6 | Cột Chi nhánh · Tình trạng |
 
 ---
 
@@ -152,7 +153,38 @@ R4 đọc được **nửa phễu đầu** chỉ từ file hội thoại: inbox 
 
 ---
 
-# 7. Danh sách kiểm trước khi đưa cho trợ lý
+---
+
+# 7. Bảng danh sách khách — đầu vào riêng của R6
+
+**R6 không đọc hội thoại.** Nó đọc **bảng danh sách khách** xuất từ CRM hoặc file quản lý khách — mỗi dòng một người, không có nội dung tin nhắn.
+
+| Cột | Bắt buộc | Dùng để |
+|---|---|---|
+| **Năm sinh** *hoặc* **Tuổi** | ✅ một trong hai | Xếp dải tuổi → nhóm khách N1–N6 |
+| **Giới tính** | ✅ | Chọn giọng và góc tiếp cận nội dung |
+| **Vấn đề gặp phải** | ✅ | Gán `V-01…V-11` — trục chính của chân dung |
+| **Dịch vụ sử dụng** | ✅ | Gán nhóm giá trị `V1/V2/V3` |
+| **Chi nhánh** | Nên có | So chân dung giữa các cơ sở |
+| **Tình trạng** | Nên có | Trợ lý tự đọc giá trị rồi nói rõ hiểu theo loại nào |
+
+**Tên cột không cần đúng từng chữ.** Viết hoa, viết thường, có dấu, không dấu, kèm chữ thừa đều được — trợ lý tự nhận. Thiếu cột nào nó nói rõ phần nào không chạy được rồi chạy tiếp phần còn lại.
+
+### Ba điều hay làm hỏng bảng khách
+
+| Việc | Hậu quả |
+|---|---|
+| Để trống ô *Vấn đề gặp phải* vì "đã có cột dịch vụ rồi" | Mất đúng trục chính. Vấn đề và dịch vụ là **hai thời điểm khác nhau** — chênh lệch giữa chúng là phần đáng đọc nhất của R6 |
+| Gộp nhiều vấn đề vào một ô không có dấu phân cách | Trợ lý chỉ lấy được mã ưu tiên cao nhất. Ngăn cách bằng `·` hoặc `,` để giữ được vấn đề phụ |
+| Lọc sẵn "chỉ lấy khách đã chốt" | Chân dung ra sẽ là chân dung **người đã mua**, không phải người **đến với Paris**. Mất luôn nhóm đang rò |
+
+> **Cột "Tình trạng" mỗi hệ ghi một kiểu** — có nơi là trạng thái lead (*mới · đang tư vấn · đã đến khám*), có nơi là tình trạng răng, có nơi là hôn nhân. Cứ xuất nguyên, trợ lý đọc giá trị thật rồi **báo lại đã hiểu theo loại nào** ở điểm dừng đầu tiên. Nó hiểu sai thì sửa ngay lúc đó.
+
+**Không cần che tên khách trước khi đưa.** R6 được dặn **không in tên, số điện thoại hay thông tin định danh** vào file đầu ra — sheet dữ liệu dùng STT hoặc mã khách. Nhưng file nguồn vẫn là dữ liệu thật: chạy trên máy nội bộ.
+
+---
+
+# 8. Danh sách kiểm trước khi đưa cho trợ lý
 
 - [ ] File hội thoại là **toàn bộ** trong kỳ, không lọc theo độ dài hay theo có SĐT
 - [ ] Nếu đã lọc → đã **ghi lại cách lọc** để nói cho trợ lý
